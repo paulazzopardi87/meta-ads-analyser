@@ -38,7 +38,13 @@ A one-line summary, **max 3 actions ranked by £ impact**, then a table like thi
 
 ### Option 1: Claude skill (recommended)
 
-**Claude.ai / desktop app:** download [`dist/meta-ads-analyser.skill`](dist/meta-ads-analyser.skill) → Settings → Capabilities → Skills → upload. (Requires code execution / skills enabled.)
+**Claude.ai (web, desktop or mobile):**
+1. Make sure code execution is on: Settings → Capabilities → **Code execution and file creation** (called "Create and edit files" in newer layouts). Skills need it.
+2. Download [`dist/meta-ads-analyser.zip`](dist/meta-ads-analyser.zip). Don't unzip it.
+3. Go to [Customize → Skills](https://claude.ai/customize/skills) → **+** → **Create skill** → **Upload a skill** → choose the zip.
+4. Check the skill's toggle is on.
+
+Works on Free, Pro, Max, Team and Enterprise plans. On Team/Enterprise, an admin may need to allow user-created skills.
 
 **Claude Code:**
 
@@ -50,7 +56,7 @@ git clone https://github.com/paulazzopardi87/meta-ads-analyser.git
 cp -r meta-ads-analyser/meta-ads-analyser ~/.claude/skills/
 ```
 
-Then attach your CSV and say **"analyse my ads"**. First time, it asks for your economics.
+Then attach your CSV and say **"analyse my ads"** (or, to force it, *"use the meta-ads-analyser skill"*). First time, it asks for your economics.
 
 ### Option 2: Copy-paste prompt (any AI chat)
 
@@ -101,10 +107,11 @@ Great CTR with terrible add-to-cart is a **page** problem. Killing the ad would 
 | Verdict | When | Do |
 |---|---|---|
 | **NO DECISION YET** | Below the data gate | Wait. Report says until when |
-| **KILL** | Creative clearly below your median, or money past the kill line | Turn it off |
+| **KILL (creative)** | CTR clearly below your median, CPC above it | Turn it off |
 | **FIX PAGE** | Ad is fine, page/offer is losing people | Fix the named page issue |
+| **KILL (money)** | 0 sales at 3× target CPA, or 1 sale at 5× | Turn it off |
 | **ITERATE** | One part works, one doesn't, or fatigue is setting in | 1–2 variants, change one thing |
-| **SCALE** | Ad set has 15+ purchases, CPA ≤ target, ROAS ≥ break-even | +20–30% budget, then hands off for 3–4 days |
+| **SCALE** | Ad set has 15+ purchases, CPA ≤ target, ROAS ≥ break-even, and this ad is carrying it | +20–30% budget, then hands off for 3–4 days |
 | **KEEP** | Profitable, between target and break-even | Leave it alone |
 | **WATCH** | Borderline | Exact trigger, e.g. "kill if CPA > £14 after £40 more" |
 
@@ -128,20 +135,21 @@ meta-ads-analyser/
 ├── meta-ads-analyser/            # The Claude skill (install this folder)
 │   ├── SKILL.md                  #   Rules, verdict logic, output format
 │   └── references/methodology.md #   The maths and reasoning behind each threshold
-├── dist/meta-ads-analyser.skill  # Same skill, zipped for upload to Claude.ai
+├── dist/meta-ads-analyser.zip    # Same skill, zipped for upload to Claude.ai
 ├── docs/
 │   ├── magic-prompt.md           # Copy-paste version for any AI chat
 │   ├── quick-start.md            # 10-minute setup + weekly routine
 │   └── column-preset.md          # Exact Ads Manager columns to export
-└── examples/
-    ├── sample-export.csv         # Example Meta export (fictional brand)
-    └── sample-report.md          # The report it produces
+├── examples/
+│   ├── sample-export.csv         # Example Meta export (fictional brand)
+│   └── sample-report.md          # The report it produces
+└── tests/check_sample.py         # Applies the verdict rules to the sample; must match the report
 ```
 
 Rebuild the zip after editing the skill:
 
 ```bash
-rm -f dist/meta-ads-analyser.skill && zip -qr dist/meta-ads-analyser.skill meta-ads-analyser
+rm -f dist/meta-ads-analyser.zip && zip -qr dist/meta-ads-analyser.zip meta-ads-analyser && python3 tests/check_sample.py
 ```
 
 ---

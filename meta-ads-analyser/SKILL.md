@@ -93,14 +93,14 @@ Rules:
 |---|---|---|---|
 | 1 | **NO DECISION YET** | Below the time gate, or below the creative gate with no other gate met | Say what to wait for and when to look again |
 | 2 | **KILL (creative)** | Creative gate met AND link CTR ≤ ~60% of account median (or < 0.8% absolute if baselines are weak) AND CPC above median | Turn it off now; it has enough data |
-| 3 | **KILL (money)** | Spend ≥ 3× target CPA with 0 purchases, or ≥ 5× with 1 (ad or pooled ad set); OR ad set ≥ 10 pooled purchases and CPA > break-even CPA by 25%+ (ROAS clearly below break-even) | Turn off (ad), or cut / restructure (ad set). Say what you'd replace it with |
-| 4 | **FIX PAGE** | Creative is fine (CTR/CPC at or better than median), page gate met, and ATC rate < ~60% of account median (or < 4% absolute); OR LPV ÷ link clicks < 70%; OR healthy ATC but checkout → purchase collapses | Name the specific likely fix: load speed, message match, price anchoring, trust/reviews, delivery cost shown late, checkout friction |
+| 3 | **FIX PAGE** | Creative is fine (CTR/CPC at or better than median), page gate met, and ATC rate < ~60% of account median (or < 4% absolute); OR LPV ÷ link clicks < 70%; OR healthy ATC but checkout → purchase collapses | Name the specific likely fix: load speed, message match, price anchoring, trust/reviews, delivery cost shown late, checkout friction. If it is also past the money kill line, pause its spend until the page is fixed |
+| 4 | **KILL (money)** | Spend ≥ 3× target CPA with 0 purchases, or ≥ 5× with 1 (this ad's own spend and purchases) | Turn off (ad), or cut / restructure (ad set). Say what you'd replace it with |
 | 5 | **ITERATE** | One part of the creative is clearly working and another isn't: strong hook but weak CTR (fix body/CTA); strong CTR but weak hook (fix first 3 sec); **fatigue**: frequency > ~3 (prospecting) with CTR down ≥ 25% vs prior period | Keep it running while you make 1–2 variants that change one thing |
-| 6 | **SCALE** | Ad set has ≥ 15 pooled purchases in ≥ 7 days AND CPA ≤ target CPA AND ROAS ≥ break-even, with no fatigue signs | Raise budget 20–30%, then leave it alone 3–4 days before the next step. Never double overnight |
-| 7 | **KEEP** | Gates met, CPA between target and break-even, no red flags | Leave it alone; check next week |
+| 6 | **SCALE** | Ad set has ≥ 15 pooled purchases in ≥ 7 days AND pooled CPA ≤ target CPA AND ROAS ≥ break-even, with no fatigue signs, AND this ad is one that carries it (its own CPA ≤ target, or it drives ≥ half the ad set's purchases). Other ads in a scaling ad set fall through to KEEP / WATCH | Raise budget 20–30%, then leave it alone 3–4 days before the next step. Never double overnight |
+| 7 | **KEEP** | Ad set has ≥ 10 pooled purchases with CPA ≤ break-even, and this ad's own CPA is ≤ break-even (or it has too few sales to judge alone), no red flags | Leave it alone; check next week |
 | 8 | **WATCH** | Gates partly met and borderline, or trending the wrong way but not yet past a kill line | Give the exact trigger: "If CPA is still > £X after another £Y spend, kill it" |
 
-Use exactly one verdict per ad. If the ad's ad set qualifies for SCALE or KILL (money), say so at ad-set level in the summary and give each ad its own creative/page verdict.
+Use exactly one verdict per ad, judged on that ad's own numbers (ad-set pooling is used only for SCALE, as above). Ad-set calls are separate: if an ad set as a whole is past the money kill line (0 sales at 3× target CPA, 1 sale at 5×, or ≥ 10 purchases with CPA > break-even by 25%+), or qualifies for SCALE, say so in **Do this now** and the account summary.
 
 ---
 
