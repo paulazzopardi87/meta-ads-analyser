@@ -19,7 +19,8 @@ f=lambda r,k: float(r[k] or 0)
 for r in R:
     r['imp']=f(r,'Impressions'); r['sp']=f(r,'Amount spent (GBP)'); r['cl']=f(r,'Link clicks')
     r['p']=f(r,'Purchases'); r['atc']=f(r,'Adds to cart'); r['lpv']=f(r,'Landing page views')
-    r['ctr']=r['cl']/r['imp']*100; r['cpc']=r['sp']/r['cl']; r['atcr']=r['atc']/r['cl']*100
+    d=lambda a,b: a/b if b else 0.0  # paused / zero-delivery rows
+    r['ctr']=d(r['cl'],r['imp'])*100; r['cpc']=d(r['sp'],r['cl']); r['atcr']=d(r['atc'],r['cl'])*100
     r['freq']=f(r,'Frequency')
 big=[r for r in R if r['imp']>=1000]
 mctr=st.median(r['ctr'] for r in big); mcpc=st.median(r['cpc'] for r in big); matc=st.median(r['atcr'] for r in big)
@@ -29,7 +30,7 @@ def verdict(r):
     s,p=AS[r['Ad set name']]
     if r['imp']<2000: return 'NO DECISION YET'
     if r['ctr']<=0.6*mctr and r['cpc']>mcpc: return 'KILL (creative)'
-    if r['ctr']>=mctr and r['cpc']<=mcpc and r['cl']>=100 and (r['atcr']<0.6*matc or r['lpv']/r['cl']<0.7): return 'FIX PAGE'
+    if r['ctr']>=mctr and r['cpc']<=mcpc and r['cl']>=100 and (r['atcr']<0.6*matc or d(r['lpv'],r['cl'])<0.7): return 'FIX PAGE'
     if (r['p']==0 and r['sp']>=3*T) or (r['p']==1 and r['sp']>=5*T): return 'KILL (money)'
     own=r['sp']/r['p'] if r['p'] else 1e9
     if p>=15 and s/p<=T and p*AOV/s>=BEROAS and (own<=T or r['p']>=p/2): return 'SCALE'
