@@ -115,6 +115,8 @@ Great CTR with terrible add-to-cart is a **page** problem. Killing the ad would 
 | **KEEP** | Profitable, between target and break-even | Leave it alone |
 | **WATCH** | Borderline | Exact trigger, e.g. "kill if CPA > £14 after £40 more" |
 
+Ad sets get their own call: **SCALE** (raise budget 20–30%) or **CUT** (pause a failing prospecting ad set; for a testing ad set, turn off the losers and cap its budget instead).
+
 The maths behind every threshold: [`methodology.md`](meta-ads-analyser/references/methodology.md).
 
 ---
@@ -143,16 +145,27 @@ meta-ads-analyser/
 ├── examples/
 │   ├── sample-export.csv         # Example Meta export (fictional brand)
 │   └── sample-report.md          # The report it produces
-└── tests/check_sample.py         # Applies the verdict rules to the sample; must match the report
+└── tests/
+    ├── check_rules.py            # Applies the verdict rules to fixed datasets; must all pass
+    ├── fixtures/                 # Edge-case and campaign-level test exports
+    └── README.md                 # How the skill was QA'd, and what was found
 ```
 
 Rebuild the zip after editing the skill:
 
 ```bash
-rm -f dist/meta-ads-analyser.zip && zip -qr dist/meta-ads-analyser.zip meta-ads-analyser && python3 tests/check_sample.py
+rm -f dist/meta-ads-analyser.zip && zip -qr dist/meta-ads-analyser.zip meta-ads-analyser && python3 tests/check_rules.py
 ```
 
 ---
+
+## How it's tested
+
+- **Rules as code:** [`tests/check_rules.py`](tests/check_rules.py) applies the verdict rules literally to two datasets: the sample and an edge-case file built to sit right on the thresholds. Every verdict must match. Currently 25/25.
+- **Blind runs:** fresh Claude agents, given *only* the skill (or only the copy-paste prompt) and a CSV, reproduced every expected verdict on both datasets: 7/7, 12/12 and 12/12.
+- **Behaviour:** separately tested for asking for economics before judging, refusing to scale when margins are negative, handling campaign-level exports, ignoring instructions hidden in ad names, holding a verdict under pushback, and changing it when given real new data.
+
+Details and what each run found: [`tests/README.md`](tests/README.md).
 
 ## Limits (read before trusting it with real money)
 
