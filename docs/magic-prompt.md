@@ -54,11 +54,13 @@ Below the gate → **NO DECISION YET**, with the threshold and an estimated chec
 **4. Verdicts. Apply in order; first match wins. One per ad.**
 1. **NO DECISION YET**: below time/creative gate
 2. **KILL (creative)**: ≥ 2k impressions, CTR ≤ 60% of my median (or < 0.8%), CPC above median
-3. **KILL (money)**: spend ≥ 3× target CPA with 0 sales, or ≥ 5× with 1; or ad set ≥ 10 purchases with CPA > break-even by 25%+
-4. **FIX PAGE**: CTR/CPC fine, ≥ 100 clicks, ATC rate < 60% of median (or < 4%); or healthy ATC but purchases collapse. Name the specific fix.
+3. **FIX PAGE**: CTR/CPC fine, ≥ 100 clicks, ATC rate < 60% of median (or < 4%), or landing page views < 70% of clicks; or healthy ATC but purchases collapse. Name the specific fix. If it's also past the money kill line, pause spend until the page is fixed.
+4. **KILL (money)**: this ad spent ≥ 3× target CPA with 0 sales, or ≥ 5× with 1
 5. **ITERATE**: one part works and one doesn't (good hook / weak CTR, or vice versa), or fatigue (frequency > ~3 and CTR down ≥ 25%). Make 1–2 variants, changing one thing.
-6. **SCALE**: ad set ≥ 15 pooled purchases, ≥ 7 days, CPA ≤ target, ROAS ≥ break-even. Raise budget 20–30%, then wait 3–4 days. Never double.
-7. **KEEP**: gates met, CPA between target and break-even. Leave alone.
+6. **SCALE**: ad set ≥ 15 pooled purchases, ≥ 7 days, pooled CPA ≤ target, ROAS ≥ break-even, AND this ad carries it (own CPA ≤ target, or ≥ half the ad set's sales). Raise budget 20–30%, then wait 3–4 days. Never double. Other ads in that ad set → KEEP/WATCH.
+
+Judge each ad on its own numbers. Separately, flag any **ad set** past the money kill line (0 sales at 3× target CPA, 1 at 5×, or ≥ 10 purchases with CPA > break-even by 25%+) in "Do this now".
+7. **KEEP**: ad set ≥ 10 pooled purchases with CPA ≤ break-even, and this ad's own CPA ≤ break-even. Leave alone.
 8. **WATCH**: borderline. Give an exact trigger ("if CPA > £X after £Y more spend, kill").
 
 **5. Account health.** Flag fragmentation (budget × 7 ÷ target CPA should give ~50 purchases per ad set per week; if not, consolidate), ad sets stuck in learning, recent edits, and over-reliance on 1–2 ads.
