@@ -49,6 +49,10 @@ For an LLM run: start a fresh chat with the skill installed (or paste `docs/magi
   - backend sales tied to one ad (discount codes)
   - "£ impact" defined as change in weekly contribution
 
+**Regression after the fixes:** fresh blind runs of the updated skill and the updated copy-paste prompt on the edge-case file both gave 12/12 ad verdicts and 3/3 ad-set calls. Both applied the new rules correctly: prospecting-only baselines, promising vs borderline WATCH, capping the testing ad set, CBO budget cuts, and the inactive label. Their remaining notes were wording only: both CTR *and* CPC required, the 100-click gate covers every FIX PAGE clause, testing counts as prospecting, and the cap uses the stated budget. Those are now clarified.
+
 **Known limits**
 - The skill is run by an LLM. Verdicts and core maths were right in every run, but one run's confidence range was slightly off (e.g. £12.27–£27.96 vs the exact £12.47–£27.15). Check the numbers it shows.
 - The 72 h gate can't be checked from a standard export, so the skill states its assumption instead.
+- Kill lines are hard lines: £0.60 past the line is a kill, £2.40 short is a WATCH. The skill flags both as low confidence. That's by design, so the advice stays consistent from week to week.
+- "£ impact" estimates depend on assumptions (e.g. marginal CPA), so they vary between runs. Verdicts don't.
